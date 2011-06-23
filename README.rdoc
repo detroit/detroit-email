@@ -1,0 +1,41 @@
+= Detroit Email Tool
+
+
+== DESCRIPTION
+
+The Email tool is used to send out project announcements to a set of
+email addresses.
+
+By default it generates a <i>release announcement</i> based on a projects
+metadata. Release announcements can be customized via _parts_, including
+a project's README file.
+
+Fully custom messages can also be sent by setting the message field,
+and or by using a message file.
+
+Email account settings default to environment variables so they need
+not be set independently for every project.
+
+  @server    ENV['EMAIL_SERVER']
+  @from      ENV['EMAIL_FROM']
+  @account   ENV['EMAIL_ACCOUNT'] || ENV['EMAIL_FROM']
+  @password  ENV['EMAIL_PASSWORD']
+  @port      ENV['EMAIL_PORT']
+  @domain    ENV['EMAIL_DOMAIN']
+  @login     ENV['EMAIL_LOGIN']
+  @secure    ENV['EMAIL_SECURE']
+
+
+== INSTALL
+
+  $ gem install detroit-email
+
+
+== COPYRIGHT
+
+Copyright (c) 2011 Thomas Sawyer
+
+GPL v.3 license
+
+See COPYING.rdoc and GPL3.txt file for details.
+
