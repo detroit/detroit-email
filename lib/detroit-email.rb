@@ -73,23 +73,31 @@ module Detroit
       @secure = s.to_b
     end
 
-    # Message to send. Defaults to a generated release announcement.
-    def message
-      @message ||= (
-        path = Dir[file].first if file
-        if path
-          project.announcement(File.new(file))
-        else
-          parts.map{ |part| /^file:\/\// =~ part.to_s ? $' : part }
-          project.announcement(*parts)
-        end
-      )
+
+    #  A S S E M B L Y   S T A T I O N S
+
+    # Attach announce method to promote assembly station.
+    def station_prepare(destination)
+      approve if destination == :promote
+    end
+
+    # Attach announce method to promote assembly station.
+    def station_promote
+      announce
+    end
+
+
+    #  S E R V I C E  M E T H O D S
+
+    #
+    def approve
+      apply_environment
+      @approved = mail_confirm?
+      exit -1 unless @approved
     end
 
     # Send announcement message.
     def announce
-      apply_environment
-
       mailopts = self.mailopts
 
       if mailto.empty?
@@ -102,8 +110,10 @@ module Detroit
         else
           #emailer = Emailer.new(mailopts)
           #emailer.email
-          if mail_confirm?
+          if @approved
             email(mailopts)
+          else
+            exit -1
           end
         end
       end
@@ -111,6 +121,19 @@ module Detroit
 
     #
     alias_method :promote, :announce
+
+    # Message to send. Defaults to a generated release announcement.
+    def message
+      @message ||= (
+        path = Dir[file].first if file
+        if path
+          project.announcement(File.new(file))
+        else
+          parts.map{ |part| /^file:\/\// =~ part.to_s ? $' : part }
+          project.announcement(*parts)
+        end
+      )
+    end
 
     # Confirm announcement
     def mail_confirm?
@@ -156,7 +179,7 @@ module Detroit
     def apply_environment
       return if noenv
       @server   ||= ENV['EMAIL_SERVER']
-      @from     ||= ENV['EMAIL_FROM']
+      @from     ||= ENV['EMAIL_FROM']    || ENV['EMAIL_ACCOUNT']
       @account  ||= ENV['EMAIL_ACCOUNT'] || ENV['EMAIL_FROM']
       @password ||= ENV['EMAIL_PASSWORD']
       @port     ||= ENV['EMAIL_PORT']
