@@ -1,16 +1,28 @@
 ---
-name : detroit-email
-title: Detroit Email
+name    : detroit-email
+version : 0.1.0
+title   : Detroit Email
+summary : Email plugin for Detroit
 
-contact: trans <transfire@gmail.com>
+authors:
+  - T.Sawyer <transfire@gmail.com>
 
 description:
   Email plugin for Detroit build system.
+  This plugin is designed to send out a well
+  formated release announcement during the
+  promote phase. Though, it can be configured
+  to send out any message desired.
+
+requirements:
+  - detroit
 
 resources:
   home: http://detroit.github.com/
   code: http://github.com/detroit/detroit-email
+  mail: http://groups.google.com/group/rubyworks-mailinglist
 
-copyright:
-  (c) 2011 Thomas Sawyer
+copyrights:
+  - (c) 2011 Thomas Sawyer (GPL3)
 
+source: Profile
