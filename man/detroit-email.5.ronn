@@ -1,0 +1,76 @@
+detroit-email(5) - send out customizable email announcement
+===========================================================
+
+## DESCRIPTION
+
+The Email plugin for Detroit can send out release annoucements, or other
+messages during the standard `promote` stop.
+
+## OPTIONS
+
+  * `file` - If the body of the message is in a file use this option
+    to set the path to that file realative to the project's root 
+    directory.
+
+  * `subject` - The subject of the message. Defaults to a typical
+    release announcement subject of "ANN: {title} {version}".
+
+  * `mailto`/`to` - List of email addresses to whom to email.
+
+  * `from` - Email address from whom.
+
+  * `server` - Email host url.
+
+  * `port` - Emails server port. The efault is usually correct.
+
+  * `account` - Email account name (defaults to `from`).
+
+  * `domain` -  User domain (not sure why SMTP requires this).
+
+  * `login` - Login type. Can be either `plain` or `login`.
+
+  * `secure` - Use TLS/SSL, true or false?
+
+  * `parts` - List of components of the announcment. This will be
+    used to construct the message as long as `file` or `message` are
+    not used. Recognizes values are `readme`, `message`, `description`,
+    `resources`, `notes` and `changes`.
+
+  * `noenv` - Do not use environment variables for email defaults.
+
+## DEFAULTS
+
+Most of the options default to environment variables (unless `noenv` is  used).
+
+ * `EMAIL_SERVER`
+ * `EMAIL_FROM`
+ * `EMAIL_ACCOUNT`
+ * `EMAIL_PORT`
+ * `EMAIL_DOMAIN`
+ * `EMAIL_LOGIN`
+ * `EMAIL_SECURE`
+ * `EMAIL_PASSWORD`
+
+Note that if EMAIL_PASSWORD is not set in the environment, then the user
+will be prompted for it on the command line when it is required.
+
+## EXAMPLES
+
+Usually the use case is send out a release announcement, and in that case the
+default configuration suffices. So, the typical example is as simple as:
+
+    announce:
+      service: email
+      mailto:
+        - ruby-talk@ruby-lang.org
+
+## COPYRIGHT
+
+Copyright (c) 2010 Thomas Sawyer, Rubyworks
+
+Detroit EMail is distributable in accordance with the GPLv3 license.
+
+## SEE ALSO
+
+dnote(1)
+
