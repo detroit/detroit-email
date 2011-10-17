@@ -6,6 +6,7 @@ detroit-email(5) - send out customizable email announcement
 The Email plug-in for Detroit can send out release announcements, or other
 messages during the standard `promote` stop.
 
+
 ## OPTIONS
 
   * `file` - If the body of the message is in a file use this option
@@ -38,6 +39,7 @@ messages during the standard `promote` stop.
 
   * `noenv` - Do not use environment variables for email defaults.
 
+
 ## DEFAULTS
 
 Most of the options default to environment variables (unless `noenv` is  used).
@@ -54,6 +56,7 @@ Most of the options default to environment variables (unless `noenv` is  used).
 Note that if EMAIL_PASSWORD is not set in the environment, then the user
 will be prompted for it on the command line when it is required.
 
+
 ## EXAMPLES
 
 Usually the use case is send out a release announcement, and in that case the
@@ -64,11 +67,22 @@ default configuration suffices. So, the typical example is as simple as:
       mailto:
         - ruby-talk@ruby-lang.org
 
+
+## RESOURCES
+
+For more information:
+
+  * [API Documentation](http://rubydoc.info/gems/detroit-email)
+
+  * [Development Site](http://github.com/detroit/detroit-email)
+
+
 ## COPYRIGHT
 
 Copyright (c) 2010 Thomas Sawyer, Rubyworks
 
 Detroit EMail is distributable in accordance with the GPLv3 license.
+
 
 ## SEE ALSO
 
