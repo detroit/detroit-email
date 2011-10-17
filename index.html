@@ -1,1 +1,154 @@
-My GitHub Page
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='content-type' value='text/html;charset=utf8'>
+  <meta name='generator' value='Ronn/v0.7.3 (http://github.com/rtomayko/ronn/tree/0.7.3)'>
+  <title>detroit-email(5) - send out customizable email announcement</title>
+  <style type='text/css' media='all'>
+  /* style: man */
+  body#manpage {margin:0}
+  .mp {max-width:100ex;padding:0 9ex 1ex 4ex}
+  .mp p,.mp pre,.mp ul,.mp ol,.mp dl {margin:0 0 20px 0}
+  .mp h2 {margin:10px 0 0 0}
+  .mp > p,.mp > pre,.mp > ul,.mp > ol,.mp > dl {margin-left:8ex}
+  .mp h3 {margin:0 0 0 4ex}
+  .mp dt {margin:0;clear:left}
+  .mp dt.flush {float:left;width:8ex}
+  .mp dd {margin:0 0 0 9ex}
+  .mp h1,.mp h2,.mp h3,.mp h4 {clear:left}
+  .mp pre {margin-bottom:20px}
+  .mp pre+h2,.mp pre+h3 {margin-top:22px}
+  .mp h2+pre,.mp h3+pre {margin-top:5px}
+  .mp img {display:block;margin:auto}
+  .mp h1.man-title {display:none}
+  .mp,.mp code,.mp pre,.mp tt,.mp kbd,.mp samp,.mp h3,.mp h4 {font-family:monospace;font-size:14px;line-height:1.42857142857143}
+  .mp h2 {font-size:16px;line-height:1.25}
+  .mp h1 {font-size:20px;line-height:2}
+  .mp {text-align:justify;background:#fff}
+  .mp,.mp code,.mp pre,.mp pre code,.mp tt,.mp kbd,.mp samp {color:#131211}
+  .mp h1,.mp h2,.mp h3,.mp h4 {color:#030201}
+  .mp u {text-decoration:underline}
+  .mp code,.mp strong,.mp b {font-weight:bold;color:#131211}
+  .mp em,.mp var {font-style:italic;color:#232221;text-decoration:none}
+  .mp a,.mp a:link,.mp a:hover,.mp a code,.mp a pre,.mp a tt,.mp a kbd,.mp a samp {color:#0000ff}
+  .mp b.man-ref {font-weight:normal;color:#434241}
+  .mp pre {padding:0 4ex}
+  .mp pre code {font-weight:normal;color:#434241}
+  .mp h2+pre,h3+pre {padding-left:0}
+  ol.man-decor,ol.man-decor li {margin:3px 0 10px 0;padding:0;float:left;width:33%;list-style-type:none;text-transform:uppercase;color:#999;letter-spacing:1px}
+  ol.man-decor {width:100%}
+  ol.man-decor li.tl {text-align:left}
+  ol.man-decor li.tc {text-align:center;letter-spacing:4px}
+  ol.man-decor li.tr {text-align:right;float:right}
+  </style>
+</head>
+<!--
+  The following styles are deprecated and will be removed at some point:
+  div#man, div#man ol.man, div#man ol.head, div#man ol.man.
+
+  The .man-page, .man-decor, .man-head, .man-foot, .man-title, and
+  .man-navigation should be used instead.
+-->
+<body id='manpage'>
+  <div class='mp' id='man'>
+
+  <div class='man-navigation' style='display:none'>
+    <a href="#NAME">NAME</a>
+    <a href="#DESCRIPTION">DESCRIPTION</a>
+    <a href="#OPTIONS">OPTIONS</a>
+    <a href="#DEFAULTS">DEFAULTS</a>
+    <a href="#EXAMPLES">EXAMPLES</a>
+    <a href="#COPYRIGHT">COPYRIGHT</a>
+    <a href="#SEE-ALSO">SEE ALSO</a>
+    </div>
+
+  <ol class='man-decor man-head man head'>
+    <li class='tl'>detroit-email(5)</li>
+    <li class='tc'></li>
+    <li class='tr'>detroit-email(5)</li>
+  </ol>
+
+  <h2 id="NAME">NAME</h2>
+<p class="man-name">
+  <code>detroit-email</code> - <span class="man-whatis">send out customizable email announcement</span>
+</p>
+
+<h2 id="DESCRIPTION">DESCRIPTION</h2>
+
+<p>The Email plugin for Detroit can send out release annoucements, or other
+messages during the standard <code>promote</code> stop.</p>
+
+<h2 id="OPTIONS">OPTIONS</h2>
+
+<ul>
+<li><p><code>file</code> - If the body of the message is in a file use this option
+to set the path to that file realative to the project's root
+directory.</p></li>
+<li><p><code>subject</code> - The subject of the message. Defaults to a typical
+release announcement subject of "ANN: {title} {version}".</p></li>
+<li><p><code>mailto</code>/<code>to</code> - List of email addresses to whom to email.</p></li>
+<li><p><code>from</code> - Email address from whom.</p></li>
+<li><p><code>server</code> - Email host url.</p></li>
+<li><p><code>port</code> - Emails server port. The efault is usually correct.</p></li>
+<li><p><code>account</code> - Email account name (defaults to <code>from</code>).</p></li>
+<li><p><code>domain</code> -  User domain (not sure why SMTP requires this).</p></li>
+<li><p><code>login</code> - Login type. Can be either <code>plain</code> or <code>login</code>.</p></li>
+<li><p><code>secure</code> - Use TLS/SSL, true or false?</p></li>
+<li><p><code>parts</code> - List of components of the announcment. This will be
+used to construct the message as long as <code>file</code> or <code>message</code> are
+not used. Recognizes values are <code>readme</code>, <code>message</code>, <code>description</code>,
+<code>resources</code>, <code>notes</code> and <code>changes</code>.</p></li>
+<li><p><code>noenv</code> - Do not use environment variables for email defaults.</p></li>
+</ul>
+
+
+<h2 id="DEFAULTS">DEFAULTS</h2>
+
+<p>Most of the options default to environment variables (unless <code>noenv</code> is  used).</p>
+
+<ul>
+<li><code>EMAIL_SERVER</code></li>
+<li><code>EMAIL_FROM</code></li>
+<li><code>EMAIL_ACCOUNT</code></li>
+<li><code>EMAIL_PORT</code></li>
+<li><code>EMAIL_DOMAIN</code></li>
+<li><code>EMAIL_LOGIN</code></li>
+<li><code>EMAIL_SECURE</code></li>
+<li><code>EMAIL_PASSWORD</code></li>
+</ul>
+
+
+<p>Note that if EMAIL_PASSWORD is not set in the environment, then the user
+will be prompted for it on the command line when it is required.</p>
+
+<h2 id="EXAMPLES">EXAMPLES</h2>
+
+<p>Usually the use case is send out a release announcement, and in that case the
+default configuration suffices. So, the typical example is as simple as:</p>
+
+<pre><code>announce:
+  service: email
+  mailto:
+    - ruby-talk@ruby-lang.org
+</code></pre>
+
+<h2 id="COPYRIGHT">COPYRIGHT</h2>
+
+<p>Copyright (c) 2010 Thomas Sawyer, Rubyworks</p>
+
+<p>Detroit EMail is distributable in accordance with the GPLv3 license.</p>
+
+<h2 id="SEE-ALSO">SEE ALSO</h2>
+
+<p><span class="man-ref">dnote<span class="s">(1)</span></span></p>
+
+
+  <ol class='man-decor man-foot man foot'>
+    <li class='tl'></li>
+    <li class='tc'>October 2011</li>
+    <li class='tr'>detroit-email(5)</li>
+  </ol>
+
+  </div>
+</body>
+</html>
