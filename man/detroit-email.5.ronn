@@ -3,13 +3,13 @@ detroit-email(5) - send out customizable email announcement
 
 ## DESCRIPTION
 
-The Email plugin for Detroit can send out release annoucements, or other
+The Email plug-in for Detroit can send out release announcements, or other
 messages during the standard `promote` stop.
 
 ## OPTIONS
 
   * `file` - If the body of the message is in a file use this option
-    to set the path to that file realative to the project's root 
+    to set the path to that file relative to the project's root 
     directory.
 
   * `subject` - The subject of the message. Defaults to a typical
@@ -21,7 +21,7 @@ messages during the standard `promote` stop.
 
   * `server` - Email host url.
 
-  * `port` - Emails server port. The efault is usually correct.
+  * `port` - Emails server port. The default is usually correct.
 
   * `account` - Email account name (defaults to `from`).
 
@@ -31,7 +31,7 @@ messages during the standard `promote` stop.
 
   * `secure` - Use TLS/SSL, true or false?
 
-  * `parts` - List of components of the announcment. This will be
+  * `parts` - List of components of the announcement. This will be
     used to construct the message as long as `file` or `message` are
     not used. Recognizes values are `readme`, `message`, `description`,
     `resources`, `notes` and `changes`.

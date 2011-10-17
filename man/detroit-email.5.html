@@ -75,26 +75,26 @@
 
 <h2 id="DESCRIPTION">DESCRIPTION</h2>
 
-<p>The Email plugin for Detroit can send out release annoucements, or other
+<p>The Email plug-in for Detroit can send out release announcements, or other
 messages during the standard <code>promote</code> stop.</p>
 
 <h2 id="OPTIONS">OPTIONS</h2>
 
 <ul>
 <li><p><code>file</code> - If the body of the message is in a file use this option
-to set the path to that file realative to the project's root
+to set the path to that file relative to the project's root
 directory.</p></li>
 <li><p><code>subject</code> - The subject of the message. Defaults to a typical
 release announcement subject of "ANN: {title} {version}".</p></li>
 <li><p><code>mailto</code>/<code>to</code> - List of email addresses to whom to email.</p></li>
 <li><p><code>from</code> - Email address from whom.</p></li>
 <li><p><code>server</code> - Email host url.</p></li>
-<li><p><code>port</code> - Emails server port. The efault is usually correct.</p></li>
+<li><p><code>port</code> - Emails server port. The default is usually correct.</p></li>
 <li><p><code>account</code> - Email account name (defaults to <code>from</code>).</p></li>
 <li><p><code>domain</code> -  User domain (not sure why SMTP requires this).</p></li>
 <li><p><code>login</code> - Login type. Can be either <code>plain</code> or <code>login</code>.</p></li>
 <li><p><code>secure</code> - Use TLS/SSL, true or false?</p></li>
-<li><p><code>parts</code> - List of components of the announcment. This will be
+<li><p><code>parts</code> - List of components of the announcement. This will be
 used to construct the message as long as <code>file</code> or <code>message</code> are
 not used. Recognizes values are <code>readme</code>, <code>message</code>, <code>description</code>,
 <code>resources</code>, <code>notes</code> and <code>changes</code>.</p></li>
