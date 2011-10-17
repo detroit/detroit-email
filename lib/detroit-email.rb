@@ -229,6 +229,12 @@ module Detroit
     #  result
     #end
 
+  public
+
+    def self.man_page
+      File.dirname(__FILE__)+'/../man/detroit-email.5'
+    end
+
   end
 
 end
