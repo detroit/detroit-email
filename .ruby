@@ -24,7 +24,7 @@ load_path:
 revision: 0
 summary: Email plugin for Detroit
 title: Detroit Email
-version: 0.1.0
+version: 0.2.0
 name: detroit-email
 description: Email plugin for Detroit build system. This plugin is designed to send
   out a well formated release announcement during the promote phase. Though, it can
