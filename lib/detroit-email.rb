@@ -76,16 +76,27 @@ module Detroit
     end
 
 
-    #  A S S E M B L Y   S T A T I O N S
+    #  A S S E M B L Y
 
-    # Attach announce method to promote assembly station.
-    def station_prepare(destination)
-      approve if destination == :promote
+    #
+    def assemble?(station, options={})
+      destination = options[:destination]
+      case station
+      when :prepare then (destination == :promote)
+      when :promote then true
+      else false    
+      end
     end
 
-    # Attach announce method to promote assembly station.
-    def station_promote
-      announce
+    # Attach #approve to prepare and #announce to promote assembly stations.
+    def assemble(station, options={})
+      destination = options[:destination]
+      case station
+      when :prepare
+        approve if destination == :promote
+      when :promote
+        announce
+      end
     end
 
 
