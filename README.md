@@ -1,16 +1,16 @@
-= Detroit Email Tool
+# Detroit Email Tool
 
-{Website}[http://rubyworks.github.com/detroit-email] /
-{Report Issue}[http://github.com/rubyworks/detroit-email/issues] /
-{Repository}[http://github.com/rubyworks/deroit-email]
+[Website](http://rubyworks.github.com/detroit-email) /
+[Report Issue](http://github.com/rubyworks/detroit-email/issues) /
+[Development](http://github.com/rubyworks/deroit-email)
 
 
-== Description
+## Description
 
 The Email tool is used to send out project announcements to a set of
 email addresses.
 
-By default it generates a <i>release announcement</i> based on a projects
+By default it generates a *release announcement* based on a projects
 metadata. Release announcements can be customized via _parts_, including
 a project's README file.
 
@@ -30,12 +30,14 @@ not be set independently for every project.
     @secure    ENV['EMAIL_SECURE']
 
 
-== Installation
+## Installation
+
+### Using RubyGems
 
   $ gem install detroit-email
 
 
-== Copyrights
+## Copyrights
 
 Copyright (c) 2011 Rubyworks
 

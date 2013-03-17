@@ -1,6 +1,6 @@
-module Detroit
+require 'detroit-standard'
 
-  require 'detroit/tool'
+module Detroit
 
   # New Email instance.
   def Email(options={})
@@ -30,6 +30,8 @@ module Detroit
   #   @secure    ENV['EMAIL_SECURE']
   #
   class Email < Tool
+
+    system :standard
 
     # Message file to send.
     attr_accessor :file
@@ -75,34 +77,10 @@ module Detroit
       @secure = s.to_b
     end
 
-
-    #  A S S E M B L Y
-
+    # Ask developer if the mail should be sent.
     #
-    def assemble?(station, options={})
-      destination = options[:destination]
-      case station
-      when :prepare then (destination == :promote)
-      when :promote then true
-      else false    
-      end
-    end
-
-    # Attach #approve to prepare and #announce to promote assembly stations.
-    def assemble(station, options={})
-      destination = options[:destination]
-      case station
-      when :prepare
-        approve if destination == :promote
-      when :promote
-        announce
-      end
-    end
-
-
-    #  S E R V I C E  M E T H O D S
-
-    #
+    # TODO: Eventually we need to make sure the console is
+    #       a visible one to the end user.
     def approve
       apply_environment
       @approved = mail_confirm?
@@ -242,8 +220,32 @@ module Detroit
 
   public
 
+    #  A S S E M B L Y  M E T H O D S
+
+    #
+    def assemble?(station, options={})
+      destination = options[:destination]
+      case station
+      when :prepare then (destination == :promote)
+      when :promote then true
+      else false    
+      end
+    end
+
+    # Attach #approve to prepare and #announce to promote assembly stations.
+    def assemble(station, options={})
+      destination = options[:destination]
+      case station
+      when :prepare
+        approve if destination == :promote
+      when :promote
+        announce
+      end
+    end
+
+    # Access to manpage.
     def self.man_page
-      File.dirname(__FILE__)+'/../man/detroit-email.5'
+      File.dirname(__FILE__) + '/../man/detroit-email.5'
     end
 
   end
