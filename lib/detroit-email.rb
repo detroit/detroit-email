@@ -2,16 +2,12 @@ require 'detroit-standard'
 
 module Detroit
 
-  # New Email instance.
-  def Email(options={})
-    Email.new(options)
-  end
-
+  ##
   # The Email tool is used to send out project announcements to a set of
   # email addresses.
   #
-  # By default it generates a <i>release announcement</i> based on a projects
-  # metadata. Release announcements can be customized via _parts_, including
+  # By default it generates a *release announcement* based on a projects
+  # metadata. Release announcements can be customized via *parts*, including
   # a project's README file.
   #
   # Fully custom messages can also be sent by setting the message field,
@@ -29,9 +25,46 @@ module Detroit
   #   @login     ENV['EMAIL_LOGIN']
   #   @secure    ENV['EMAIL_SECURE']
   #
+  # This tool ties into the `prepare` and `promote` stations of the
+  # standard toolchain.
+  #
   class Email < Tool
 
-    system :standard
+    # Designed to interface with Statndard assembly. Attaches `#approve`
+    # method to `prepare` and `#announce` method to `promote` assembly
+    # stations.
+    #
+    # @!parse
+    #   include Standard
+    #
+    assembly Standard
+
+    # Needs email utility provided by detroit.
+    include EmailUtils
+
+    # Location of manpage for this tool.
+    MANPAGE = File.dirname(__FILE__) + '/../man/detroit-email.5'
+
+    # Load any special requirements and set attribute defaults.
+    #
+    # @return [void]
+    def prerequisite
+      require 'facets/boolean'  # TODO: should this universal?
+
+      @mailto   = ['rubytalk@ruby-lang.org']
+      @subject  = "[ANN] %s v%s released" % [metadata.title, metadata.version]
+      @file     = nil #'doc/ANN{,OUNCE}{,.txt,.rdoc}' TODO: default announcment file?
+      @parts    = [:message, :description, :resources, :notes, :changes]
+
+      #mailopts = Ratch::Emailer.environment_options.rekey(&:to_s)  # FIXME
+      #@port    = mailopts['port']
+      #@server  = mailopts['server']
+      #@account = mailopts['account']  #|| metadata.email
+      #@domain  = mailopts['domain']   #|| metadata.domain
+      #@login   = mailopts['login']
+      #@secure  = mailopts['secure']
+      #@from    = mailopts['from']     #|| metadata.email
+    end
 
     # Message file to send.
     attr_accessor :file
@@ -78,17 +111,20 @@ module Detroit
     end
 
     # Ask developer if the mail should be sent.
-    #
-    # TODO: Eventually we need to make sure the console is
-    #       a visible one to the end user.
     def approve
       apply_environment
       @approved = mail_confirm?
+      # TODO: better way to terminate?
       exit -1 unless @approved
     end
 
+    # Alias for #approve.
+    def prepare; approve; end
+
     # Send announcement message.
     def announce
+      apply_environment unless @approved
+
       mailopts = self.mailopts
 
       if mailto.empty?
@@ -110,8 +146,10 @@ module Detroit
       end
     end
 
-    #
-    alias_method :promote, :announce
+    # Alias for #announce.
+    def promote
+      announce
+    end
 
     # Message to send. Defaults to a generated release announcement.
     def message
@@ -179,29 +217,6 @@ module Detroit
       @secure   ||= ENV['EMAIL_SECURE']
     end
 
-    private
-
-    def initialize_defaults
-      @mailto   = ['rubytalk@ruby-lang.org']
-      @subject  = "[ANN] %s v%s released" % [metadata.title, metadata.version]
-      @file     = nil #'doc/ANN{,OUNCE}{,.txt,.rdoc}' TODO: default announcment file?
-      @parts    = [:message, :description, :resources, :notes, :changes]
-
-      #mailopts = Ratch::Emailer.environment_options.rekey(&:to_s)  # FIXME
-      #@port    = mailopts['port']
-      #@server  = mailopts['server']
-      #@account = mailopts['account']  #|| metadata.email
-      #@domain  = mailopts['domain']   #|| metadata.domain
-      #@login   = mailopts['login']
-      #@secure  = mailopts['secure']
-      #@from    = mailopts['from']     #|| metadata.email
-    end
-
-    #
-    def initialize_requires
-      require 'facets/boolean'  # TODO: should this universal?
-    end
-
     #
     #def announce_options(options)
     #  options  = options.rekey
@@ -218,34 +233,18 @@ module Detroit
     #  result
     #end
 
-  public
-
-    #  A S S E M B L Y  M E T H O D S
-
     #
     def assemble?(station, options={})
-      destination = options[:destination]
-      case station
-      when :prepare then (destination == :promote)
-      when :promote then true
-      else false    
-      end
+      return true if station == :prepare && approve?(options)
+      return true if station == :promote
+      return false
     end
 
-    # Attach #approve to prepare and #announce to promote assembly stations.
-    def assemble(station, options={})
-      destination = options[:destination]
-      case station
-      when :prepare
-        approve if destination == :promote
-      when :promote
-        announce
-      end
-    end
+  private
 
-    # Access to manpage.
-    def self.man_page
-      File.dirname(__FILE__) + '/../man/detroit-email.5'
+    #
+    def approve?(state)
+      state[:destination] == :promote
     end
 
   end
@@ -266,4 +265,3 @@ end
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-

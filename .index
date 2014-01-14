@@ -26,20 +26,20 @@ resources:
 repositories: []
 categories: []
 copyrights:
-- holder: Thomas Sawyer
+- holder: Rubyworks
   year: '2011'
-  license: GPL3
+  license: GPL-3.0
 customs: []
 paths:
   lib:
   - lib
-created: '2011-10-16'
-summary: Email plugin for Detroit
-title: Detroit Email
-version: 0.2.1
 name: detroit-email
-suite: detroit
+title: Detroit Email
+summary: Email plugin for Detroit
+created: '2011-10-16'
 description: Email plugin for Detroit build system. This plugin is designed to send
   out a well formated release announcement during the promote phase. Though, it can
   be configured to send out any message desired.
-date: '2013-03-13'
+suite: detroit
+version: 0.4.0
+date: '2014-01-13'

@@ -3,11 +3,14 @@ detroit-email(5) - send out customizable email announcement
 
 ## DESCRIPTION
 
-The Email plug-in for Detroit can send out release announcements, or other
-messages during the standard `promote` stop.
+The Email plug-in for Detroit can send out release announcements,
+or other messages during the standard `promote` stage.
 
 
 ## OPTIONS
+
+The following options can be used in the Detroit toolchain file
+for defining an Email tool instance.
 
   * `file` - If the body of the message is in a file use this option
     to set the path to that file relative to the project's root 
@@ -59,11 +62,11 @@ will be prompted for it on the command line when it is required.
 
 ## EXAMPLES
 
-Usually the use case is send out a release announcement, and in that case the
-default configuration suffices. So, the typical example is as simple as:
+Usually the usecase is for sending out a release announcement, and in that
+case the default configuration suffices. So, the typical example is simply:
 
     announce:
-      service: email
+      tool: email
       mailto:
         - ruby-talk@ruby-lang.org
 
@@ -79,7 +82,7 @@ For more information:
 
 ## COPYRIGHT
 
-Copyright (c) 2010 Thomas Sawyer, Rubyworks
+Copyright (c) 2010 Rubyworks
 
 Detroit EMail is distributable in accordance with the GPLv3 license.
 

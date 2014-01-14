@@ -4,8 +4,12 @@
 [Report Issue](http://github.com/rubyworks/detroit-email/issues) /
 [Development](http://github.com/rubyworks/deroit-email)
 
+[![Build Status](https://secure.travis-ci.org/rubyworks/detroit-email.png)](http://travis-ci.org/rubyworks/detroit-email) 
+[![Gem Version](https://badge.fury.io/rb/detroit-email.png)](http://badge.fury.io/rb/detroit-email) &nbsp; &nbsp;
+[![Flattr Me](http://api.flattr.com/button/flattr-badge-large.png)](http://flattr.com/thing/324911/Rubyworks-Ruby-Development-Fund)
 
-## Description
+
+## About
 
 The Email tool is used to send out project announcements to a set of
 email addresses.
@@ -37,9 +41,13 @@ not be set independently for every project.
   $ gem install detroit-email
 
 
-## Copyrights
+## Legal
+
+Detroit Email
 
 Copyright (c) 2011 Rubyworks
+
+(GPL-3.0 License)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -51,6 +59,4 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+See COPYING.md file for full details.

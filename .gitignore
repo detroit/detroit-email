@@ -4,6 +4,10 @@
 .yardoc
 doc/
 log/
+man/*.5
+man/*.html
 pkg/
 tmp/
 web/
+
+
