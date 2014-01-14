@@ -9,7 +9,7 @@ authors:
 organizations:
 - name: Rubyworks
 requirements:
-- version: 0.3.0+
+- version: 0.4+
   name: detroit
 conflicts: []
 alternatives: []
